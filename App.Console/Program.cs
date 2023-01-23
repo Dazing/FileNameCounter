@@ -4,9 +4,11 @@ using App.Core.Services;
 
 string filePath = Environment.GetCommandLineArgs()[1];
 
+if(string.IsNullOrWhiteSpace(filePath)) throw new ParameterRequiredException($"A FilePath is required as the first parameter.");
+
 Console.WriteLine("Validating that File Exists..");
 var fileExists = File.Exists(filePath);
-if(!fileExists) throw new AppFileNotFoundException($"Cannot find file with path '{filePath}'");
+if(!fileExists) throw new AppFileNotFoundException($"Cannot find file with path '{filePath}'.");
 
 Console.WriteLine("Getting file name from path..");
 var fileName = Path.GetFileNameWithoutExtension(filePath);
