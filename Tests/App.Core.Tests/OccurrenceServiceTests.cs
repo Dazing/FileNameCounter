@@ -39,11 +39,33 @@ public class OccurrenceServiceTests
 
     [Theory]
     [EmbeddedResourceData(typeof(TestFile), "TestFile_SomeMatches.txt")]
-    public void CountOccurrences_SomeMatches_ShouldReturnMatches(string data)
+    public void CountOccurrences_SomeMatches_ShouldReturnAllMatches(string data)
     {
         var streamReader = GetReaderFromTestData(data);
         
         var count = _occurrenceService.CountOccurrences(streamReader, "TestFile_SomeMatches");
+
+        Assert.Equal(7, count);
+    }
+
+    [Theory]
+    [EmbeddedResourceData(typeof(TestFile), "TestFile_CaseInsensitive.txt")]
+    public void CountOccurrences_CaseSensitivity_ShouldReturnExactMatches(string data)
+    {
+        var streamReader = GetReaderFromTestData(data);
+        
+        var count = _occurrenceService.CountOccurrences(streamReader, "TestFile_CaseInsensitive");
+
+        Assert.Equal(5, count);
+    }
+
+    [Theory]
+    [EmbeddedResourceData(typeof(TestFile), "TestFile_CaseInsensitive.txt")]
+    public void CountOccurrencesCaseInsensitive_CaseSensitivity_ShouldReturnAllMatches(string data)
+    {
+        var streamReader = GetReaderFromTestData(data);
+        
+        var count = _occurrenceService.CountOccurrencesCaseInsensitive(streamReader, "TestFile_CaseInsensitive");
 
         Assert.Equal(7, count);
     }

@@ -30,6 +30,7 @@
     <EmbeddedResource Include="TestFiles\TestFile_EmptyFile.txt" />
     <EmbeddedResource Include="TestFiles\TestFile_NoMatches.txt" />
     <EmbeddedResource Include="TestFiles\TestFile_SomeMatches.txt" />
+    <EmbeddedResource Include="TestFiles\TestFile_CaseInsensitive.txt" />
   </ItemGroup>
 
 </Project>
