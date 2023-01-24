@@ -59,6 +59,51 @@ public class OccurrenceServiceTests
         Assert.Equal(5, count);
     }
 
+
+    [Theory]
+    [EmbeddedResourceData(typeof(TestFile), "TestFile_EmptyFile.txt")]
+    public void CountOccurrencesTurbo_EmptyString_ShouldReturn0(string data)
+    {
+        var streamReader = GetReaderFromTestData(data);
+        
+        var count = _occurrenceService.CountOccurrencesTurbo(streamReader, "TestFile_EmptyFile");
+
+        Assert.Equal(0, count);
+    }
+
+    [Theory]
+    [EmbeddedResourceData(typeof(TestFile), "TestFile_NoMatches.txt")]
+    public void CountOccurrencesTurbo_NoMatches_ShouldReturn0(string data)
+    {
+        var streamReader = GetReaderFromTestData(data);
+        
+        var count = _occurrenceService.CountOccurrencesTurbo(streamReader, "TestFile_EmptyFile");
+
+        Assert.Equal(0, count);
+    }
+
+    [Theory]
+    [EmbeddedResourceData(typeof(TestFile), "TestFile_SomeMatches.txt")]
+    public void CountOccurrencesTurbo_SomeMatches_ShouldReturnAllMatches(string data)
+    {
+        var streamReader = GetReaderFromTestData(data);
+        
+        var count = _occurrenceService.CountOccurrencesTurbo(streamReader, "TestFile_SomeMatches");
+
+        Assert.Equal(7, count);
+    }
+
+    [Theory]
+    [EmbeddedResourceData(typeof(TestFile), "TestFile_CaseInsensitive.txt")]
+    public void CountOccurrencesTurbo_CaseSensitivity_ShouldReturnExactMatches(string data)
+    {
+        var streamReader = GetReaderFromTestData(data);
+        
+        var count = _occurrenceService.CountOccurrencesTurbo(streamReader, "TestFile_CaseInsensitive");
+
+        Assert.Equal(5, count);
+    }
+
     [Theory]
     [EmbeddedResourceData(typeof(TestFile), "TestFile_CaseInsensitive.txt")]
     public void CountOccurrencesCaseInsensitive_CaseSensitivity_ShouldReturnAllMatches(string data)
